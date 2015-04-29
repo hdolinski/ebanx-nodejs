@@ -28,4 +28,26 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-module.exports = process.env.EBANX_COV ? require(__dirname + '/lib-cov/ebanx') : require(__dirname + '/lib/ebanx');
+var utils = require('../../lib/Config');
+var ebanx = require('../../lib/ebanx');
+var eb = ebanx();
+
+eb.configure({
+  integrationKey : "integration_key",
+  testMode : true
+});
+
+utils.httpClient = "Mock";
+
+var hash = {hash : "552c21d21c55dd815c92ca69d937603913f1e69153916b0f"};
+
+
+exports.testPrint = function(test){
+  eb.print (hash, function(err, reply) {
+    test.equal ("object", typeof(reply));
+    test.equal (reply.method,"GET");
+    test.equal (reply.uri,"print");
+    test.equal (reply.params.hash, hash.hash)
+    test.done();
+  });
+};

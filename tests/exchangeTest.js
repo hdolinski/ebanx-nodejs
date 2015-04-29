@@ -28,4 +28,40 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-module.exports = process.env.EBANX_COV ? require(__dirname + '/lib-cov/ebanx') : require(__dirname + '/lib/ebanx');
+var utils = require('../../lib/Config');
+var ebanx = require('../../lib/ebanx');
+var eb = ebanx();
+
+eb.configure({
+  integrationKey : "integration_key",
+  testMode : true
+});
+
+utils.httpClient = "Mock";
+
+var currency = {currency_code : "USD", currency_base : "BRL"};
+
+exports.testExchange = function(test){
+  eb.exchange (currency, function(err, reply) {
+    test.equal ("object", typeof(reply));
+    test.equal (reply.method,"GET");
+    test.equal (reply.uri,"ws/exchange");
+    test.equal (reply.params.currency_code , currency.currency_code);
+    test.equal (reply.params.currency_base , currency.currency_base);
+    test.done();
+  });
+};
+
+exports.testExchangeCode = function(test){
+  eb.exchange (currency, function(err, reply) {
+    test.equal (reply.params.currency_code , currency.currency_code);
+    test.done();
+  });
+};
+
+exports.testExchangeBase = function(test){
+  eb.exchange (currency, function(err, reply) {
+    test.equal (reply.params.currency_base , currency.currency_base);
+    test.done();
+  });
+};
