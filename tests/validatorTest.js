@@ -28,7 +28,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-var validator = require('../../lib/resources/Validator');
+var validator = require('../lib/resources/Validator');
 
 exports.testValidator = function(test) {
 

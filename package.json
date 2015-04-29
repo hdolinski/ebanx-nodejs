@@ -18,7 +18,6 @@
     "nodeunit": "*"
   },
   "scripts": {
-    "test": "nodeunit tests/resources/",
     "test": "node_modules/.bin/nodeunit tests/",
     "coveralls": "jscoverage lib && EBANX_COV=1 nodeunit --reporter=lcov tests | coveralls"
   },

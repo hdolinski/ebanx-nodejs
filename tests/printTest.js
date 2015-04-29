@@ -28,8 +28,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-var utils = require('../../lib/Config');
-var ebanx = require('../../lib/ebanx');
+var utils = require('../lib/Config');
+var ebanx = require('../lib/ebanx');
 var eb = ebanx();
 
 eb.configure({
