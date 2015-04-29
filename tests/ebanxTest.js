@@ -28,22 +28,26 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-var test = require('nodeunit');
+//var test = require('node');
 var ebanx = require('../lib/ebanx');
-var utils = require('../lib/Utils');
+var utils = require('../lib/Config');
 var fs = require("fs");
-var filename = "./integration_key";
+var filename = "tests/integration_key";
 
 var integration_key = fs.readFileSync(filename, "utf8");
 
 var eb = ebanx();
-eb.integrationKey = integration_key;
-eb.testMode = true;
+eb.configure({
+	integrationKey : integration_key,
+	testMode : true
+})
 
-var config = new utils(eb.integrationKey, eb.testMode);
-
-exports.testConfig = function(test){
-    test.equal( eb.integrationKey, config.getIntegrationKey());
-    test.equal( eb.testMode, config.getTestMode());
+exports.testIntegrationKey = function(test) {
+    test.equal( eb.settings.integrationKey, utils.getIntegrationKey());
     test.done();
+};
+
+exports.testTestMode = function(test) {
+	test.equal( eb.settings.testMode, utils.getTestMode());
+	test.done();
 };
