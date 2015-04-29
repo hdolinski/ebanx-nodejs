@@ -2,6 +2,12 @@ EBANX NodeJs Module
 ==============
 EBANX is the market leader in e-commerce payment solutions for International Merchants selling online to Brazil. This module enables you to integrate EBANX with NodeJs.
 
+Continuous integration status:
+
+[![Build Status](https://travis-ci.org/hdolinski/ebanx-nodejs.svg?branch=master)](https://travis-ci.org/hdolinski/ebanx-nodejs)
+
+NPM status:
+[![NPM version](https://badge.fury.io/js/ebanx.svg)](https://badge.fury.io/js/ebanx)
 
 Installation
 ----------
