@@ -13,7 +13,9 @@
   "dependencies": {
     "request": "2.*.*"
   },
-
+  "scripts": {
+    "test": "nodeunit tests/ebanxTest.js"
+  },
    "keywords": [
     "ebanx",
     "payment gateway",
