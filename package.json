@@ -11,14 +11,16 @@
     "url": "https://github.com/hdolinski/ebanx-nodejs"
   },
   "dependencies": {
-    "request": "2.*.*",
+    "request": "2.*.*"
+  },
+  "devDependencies": {
     "nodeunit": "*"
   },
   "scripts": {
     "test": "nodeunit tests/",
     "test": "nodeunit tests/resources/"
   },
-   "keywords": [
+  "keywords": [
     "ebanx",
     "payment gateway",
     "boleto bancario"

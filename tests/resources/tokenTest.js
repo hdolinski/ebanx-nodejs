@@ -60,7 +60,6 @@ exports.testToken = function(test){
 
 exports.testTokenParamsPaymentTypeCode = function(test){
   eb.token (creditcard, function(err, reply) {
-    console.log(reply);
     test.equal (reply.params.payment_type_code, creditcard.payment_type_code);
     test.done();
   });
@@ -68,7 +67,6 @@ exports.testTokenParamsPaymentTypeCode = function(test){
 
 exports.testTokenParamsCreditCardNumber = function(test){
   eb.token (creditcard, function(err, reply) {
-    console.log(reply);
     test.equal (reply.params.creditcard.card_number, creditcard.creditcard.card_number);
     test.done();
   });
@@ -76,7 +74,6 @@ exports.testTokenParamsCreditCardNumber = function(test){
 
 exports.testTokenParamsCreditCardName = function(test){
   eb.token (creditcard, function(err, reply) {
-    console.log(reply);
     test.equal (reply.params.creditcard.card_name, creditcard.creditcard.card_name);
     test.done();
   });
@@ -84,7 +81,6 @@ exports.testTokenParamsCreditCardName = function(test){
 
 exports.testTokenParamsCreditCardDueDate = function(test){
   eb.token (creditcard, function(err, reply) {
-    console.log(reply);
     test.equal (reply.params.creditcard.card_due_date, creditcard.creditcard.card_due_date);
     test.done();
   });
@@ -92,7 +88,6 @@ exports.testTokenParamsCreditCardDueDate = function(test){
 
 exports.testTokenParamsCreditCardCvv = function(test){
   eb.token (creditcard, function(err, reply) {
-    console.log(reply);
     test.equal (reply.params.creditcard.card_cvv, creditcard.creditcard.card_cvv);
     test.done();
   });
