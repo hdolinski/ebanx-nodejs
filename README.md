@@ -86,6 +86,7 @@ Usage
 ```
 
 ## Changelog
+* **1.2.4**: Corrected unit testings
 * **1.2.3**: Changed require capital letter
 * **1.2.2**: Added validation on "testMode".
 * **1.2.1**: Calling Config module in Client only.
@@ -96,5 +97,5 @@ Usage
 * **1.0.0**: Using Request Module. Added Test Cases.
 * **0.2.1**: Added Validator module.
 * **0.1.1**: Structured Client code.
-* **0.1.0**: added Direct and Token operations.
-* **0.0.1**: beta release.
+* **0.1.0**: Added Direct and Token operations.
+* **0.0.1**: Beta release.

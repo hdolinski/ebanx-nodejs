@@ -28,19 +28,14 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-//var test = require('node');
 var ebanx = require('../lib/ebanx');
 var utils = require('../lib/Config');
-var fs = require("fs");
-var filename = "tests/integration_key";
-
-var integration_key = fs.readFileSync(filename, "utf8");
 
 var eb = ebanx();
 eb.configure({
-	integrationKey : integration_key,
+	integrationKey : "integration_key",
 	testMode : true
-})
+});
 
 exports.testIntegrationKey = function(test) {
     test.equal( eb.settings.integrationKey, utils.getIntegrationKey());
@@ -49,5 +44,14 @@ exports.testIntegrationKey = function(test) {
 
 exports.testTestMode = function(test) {
 	test.equal( eb.settings.testMode, utils.getTestMode());
+	test.done();
+};
+
+exports.testEndPoint = function(test) {
+	test.equal( utils.getEndPoint(), "https://sandbox.ebanx.com/");
+	eb.configure({
+	  testMode : false
+    });
+	test.equal( utils.getEndPoint(), "https://api.ebanx.com/");
 	test.done();
 };
