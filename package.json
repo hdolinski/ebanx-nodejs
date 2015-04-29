@@ -11,7 +11,8 @@
     "url": "https://github.com/hdolinski/ebanx-nodejs"
   },
   "dependencies": {
-    "request": "2.*.*"
+    "request": "2.*.*",
+    "nodeunit": "*"
   },
   "scripts": {
     "test": "nodeunit tests/ebanxTest.js"
