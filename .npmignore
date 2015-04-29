@@ -1,3 +1,5 @@
 teste.js
 node_modules/
 tests/integration_key
+lib-cov/
+.coveralls.yml
