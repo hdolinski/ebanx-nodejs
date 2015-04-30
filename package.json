@@ -14,11 +14,10 @@
     "request": "2.*.*"
   },
   "devDependencies": {
+    "chai": "2.10.0",
     "coveralls": "2.10.0",
-    "jscoverage": "^0.5.9",
     "mocha": "^2.2.4",
-    "istanbul": "0.3.5",
-    "mocha-lcov-reporter": "*"
+    "istanbul": "0.3.5"
   },
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha ./tests",
