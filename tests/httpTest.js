@@ -37,12 +37,19 @@ eb.configure({
   testMode : true
 });
 
+utils.httpClient = "HTTP";
+
 var hash = {hash : "552c21d21c55dd815c92ca69d937603913f1e69153916b0f"};
 
 var should = require('chai').should();
 var expect = require('chai').expect;
 
 describe('HTTP Client test', function() {
+  eb.configure({
+  integrationKey : "integration_key",
+  testMode : true
+});
+  utils.httpClient = "HTTP";
   it('Should return error', function(done) {
     eb.query (hash, function(err, reply) {
       should.exist(err);
