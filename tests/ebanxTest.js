@@ -30,28 +30,31 @@
 
 var ebanx = require('../lib/ebanx');
 var utils = require('../lib/Config');
-
+var test = require('assert');
 var eb = ebanx();
+
 eb.configure({
 	integrationKey : "integration_key",
 	testMode : true
 });
 
-exports.testIntegrationKey = function(test) {
-    test.equal( eb.settings.integrationKey, utils.getIntegrationKey());
-    test.done();
-};
+describe('Configuration', function() {
+  it('Integration Key should be setted', function(done) {
+  	test.equal( eb.settings.integrationKey, utils.getIntegrationKey());
+    done();  	
+  })
 
-exports.testTestMode = function(test) {
-	test.equal( eb.settings.testMode, utils.getTestMode());
-	test.done();
-};
+  it('Test Mode Should be Setted', function(done) {
+    test.equal( eb.settings.testMode, utils.getTestMode());
+    done();   
+  })
 
-exports.testEndPoint = function(test) {
-	test.equal( utils.getEndPoint(), "https://sandbox.ebanx.com/");
-	eb.configure({
-	  testMode : false
-    });
-	test.equal( utils.getEndPoint(), "https://api.ebanx.com/");
-	test.done();
-};
+  it('EndPoint return for testMode false and true', function(done) {
+    test.equal( utils.getEndPoint(), "https://sandbox.ebanx.com/");
+    eb.configure({
+      testMode : false
+    })
+    test.equal( utils.getEndPoint(), "https://api.ebanx.com/");
+    done();   
+  })
+});

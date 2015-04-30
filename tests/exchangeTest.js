@@ -30,6 +30,7 @@
 
 var utils = require('../lib/Config');
 var ebanx = require('../lib/ebanx');
+var test = require('assert');
 var eb = ebanx();
 
 eb.configure({
@@ -41,27 +42,31 @@ utils.httpClient = "Mock";
 
 var currency = {currency_code : "USD", currency_base : "BRL"};
 
-exports.testExchange = function(test){
+describe('Exchange Operation', function() {
   eb.exchange (currency, function(err, reply) {
-    test.equal ("object", typeof(reply));
-    test.equal (reply.method,"GET");
-    test.equal (reply.uri,"ws/exchange");
-    test.equal (reply.params.currency_code , currency.currency_code);
-    test.equal (reply.params.currency_base , currency.currency_base);
-    test.done();
-  });
-};
+    it('Should return object', function(done) {
+      test.equal ("object", typeof(reply));
+      done();   
+    })
+    
+    it('Method should be GET', function(done) {
+      test.equal (reply.method,"GET");
+      done();
+    })
 
-exports.testExchangeCode = function(test){
-  eb.exchange (currency, function(err, reply) {
-    test.equal (reply.params.currency_code , currency.currency_code);
-    test.done();
-  });
-};
+    it('URI should point to ws/exchange', function(done) {
+      test.equal (reply.uri,"ws/exchange");
+      done();
+    })
 
-exports.testExchangeBase = function(test){
-  eb.exchange (currency, function(err, reply) {
-    test.equal (reply.params.currency_base , currency.currency_base);
-    test.done();
-  });
-};
+    it('Param must have currency_code', function(done) {
+      test.equal (reply.params.currency_code, currency.currency_code)
+      done();  
+    })
+
+    it('Param must have currency_base', function(done) {
+      test.equal (reply.params.currency_base, currency.currency_base)
+      done();  
+    })
+  })
+});

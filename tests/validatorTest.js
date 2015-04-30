@@ -29,26 +29,38 @@
  */
 
 var validator = require('../lib/resources/Validator');
+var test = require('assert');
 
-exports.testValidator = function(test) {
-
+describe('Validator module', function() {
   var token = {
     payment_type_code : "visa",
     creditcard : {
-	    card_number : "4111111111111111",
-	    card_name : "eita teste",
-	    card_due_date : "10/2020",
-	    card_cvv : "123",
-	    levelThree : {
-	  	  thisIsLevelThree : "Test"
-	    }
+      card_number : "4111111111111111",
+      card_name : "eita teste",
+      card_due_date : "10/2020",
+      card_cvv : "123",
+      levelThree : {
+        thisIsLevelThree : "Test"
+      }
     }
   }
+  
+  it('Should have hash', function(done) {
+    validator.params = {hash : "LoremIpsum"};
+    test.equal(validator.validatePresence("hash"), true);
+    done();  
+  })
+  
+  it('Should have creditcard.card_number', function(done) {
+    validator.params = token;
+    test.equal(validator.validatePresence("creditcard.card_number"), true);
+    done();
+  })
+  
+  it('Should have creditcard.levelThree.thisIsLevelThree', function(done) {
+    validator.params = token;
+    test.equal(validator.validatePresence("creditcard.levelThree.thisIsLevelThree"), true);
+    done();
+  })
 
-  validator.params = {hash : "LoremIpsum"};
-  test.equal(validator.validatePresence("hash"), true);
-  validator.params = token;
-  test.equal(validator.validatePresence("creditcard.card_number"), true);
-  test.equal(validator.validatePresence("creditcard.levelThree.thisIsLevelThree"), true);
-  test.done();
-};
+});

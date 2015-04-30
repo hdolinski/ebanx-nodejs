@@ -28,4 +28,4 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-module.exports = process.env.EBANX_COV ? require(__dirname + '/lib-cov/ebanx') : require(__dirname + '/lib/ebanx');
+module.exports = require(__dirname + '/lib/ebanx');

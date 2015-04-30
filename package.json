@@ -15,12 +15,14 @@
   },
   "devDependencies": {
     "jscoverage": "^0.5.9",
-    "nodeunit": "*"
+    "mocha": "^2.2.4",
+    "istanbul": "0.3.5",
+    "mocha-lcov-reporter": "*"
   },
   "scripts": {
-    "test": "node_modules/.bin/nodeunit tests/",
-    "coveralls": "jscoverage lib && EBANX_COV=1 nodeunit --reporter=lcov tests | coveralls"
-  },
+    "test": "./node_modules/mocha/bin/mocha ./tests",
+    "test-travis": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./tests"
+ },
   "keywords": [
     "ebanx",
     "payment gateway",

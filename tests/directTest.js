@@ -30,6 +30,7 @@
 
 var utils = require('../lib/Config');
 var ebanx = require('../lib/ebanx');
+var test = require('assert');
 var eb = ebanx();
 
 eb.configure({
@@ -57,130 +58,106 @@ var direct = {
   amount_total : 423.00
 }
 
-exports.testDirect = function(test){
+describe('Direct Operation', function() {
   eb.direct (direct, function(err, reply) {
-    test.equal ("object", typeof(reply));
-    test.equal (reply.method,"POST");
-    test.equal (reply.uri,"ws/direct");
-    test.done();
-  });
-};
+    it('Should return object', function(done) {
+      test.equal ("object", typeof(reply));
+      done();   
+    })
+    
+    it('Method should be POST', function(done) {
+      test.equal (reply.method,"POST");
+      done();
+    })
 
-exports.testDirectMode = function(test){
-  eb.direct (direct, function(err, reply) {
-    test.equal (reply.params.mode, "full")
-    test.done();
-  });
-};
+    it('URI should point to ws/direct', function(done) {
+      test.equal (reply.uri,"ws/direct");
+      done();
+    })
 
-exports.testDirectKey = function(test){
-  eb.direct (direct, function(err, reply) {
-    test.equal (reply.direct, true)
-    test.done();
-  });
-};
+    it('Params should contain "direct"', function(done) {
+      test.equal (reply.direct, true)
+      done();  
+    })
 
-exports.testDirectParamCurrencyCode = function(test){
-  eb.direct (direct, function(err, reply) {
-    test.equal (reply.params.payment.currency_code, direct.currency_code)
-    test.done();
-  });
-};
+    it('Param "mode" should be "full"', function(done) {
+      test.equal (reply.params.mode, "full")
+      done();  
+    })
 
-exports.testDirectParamMerchantPaymentCode = function(test){
-  eb.direct (direct, function(err, reply) {
-    test.equal (reply.params.payment.merchant_payment_code, direct.merchant_payment_code)
-    test.done();
-  });
-};
+    it('Param "currency_code" should be passed', function(done) {
+      test.equal (reply.params.payment.currency_code, direct.currency_code)
+      done();  
+    })
 
-exports.testDirectParamPhoneNumber = function(test){
-  eb.direct (direct, function(err, reply) {
-    test.equal (reply.params.payment.phone_number, direct.phone_number)
-    test.done();
-  });
-};
+    it('Param "merchant_payment_code" should be passed', function(done) {
+      test.equal (reply.params.payment.merchant_payment_code, direct.merchant_payment_code)
+      done();  
+    })
 
-exports.testDirectParamCountry = function(test){
-  eb.direct (direct, function(err, reply) {
-    test.equal (reply.params.payment.country, direct.country)
-    test.done();
-  });
-};
+    it('Param "phone_number" should be passed', function(done) {
+      test.equal (reply.params.payment.phone_number, direct.phone_number)
+      done();  
+    })
 
-exports.testDirectParamZipcode = function(test){
-  eb.direct (direct, function(err, reply) {
-    test.equal (reply.params.payment.zipcode, direct.zipcode)
-    test.done();
-  });
-};
+    it('Param "country" should be passed', function(done) {
+      test.equal (reply.params.payment.country, direct.country)
+      done();  
+    })
 
-exports.testDirectParamState = function(test){
-  eb.direct (direct, function(err, reply) {
-    test.equal (reply.params.payment.state, direct.state)
-    test.done();
-  });
-};
+    it('Param "zipcode" should be passed', function(done) {
+      test.equal (reply.params.payment.zipcode, direct.zipcode)
+      done();  
+    })
 
-exports.testDirectParamCity = function(test){
-  eb.direct (direct, function(err, reply) {
-    test.equal (reply.params.payment.city, direct.city)
-    test.done();
-  });
-};
+    it('Param "state" should be passed', function(done) {
+      test.equal (reply.params.payment.state, direct.state)
+      done();  
+    })
 
-exports.testDirectParamStreetNumber = function(test){
-  eb.direct (direct, function(err, reply) {
-    test.equal (reply.params.payment.street_number, direct.street_number)
-    test.done();
-  });
-};
+    it('Param "city" should be passed', function(done) {
+      test.equal (reply.params.payment.city, direct.city)
+      done();  
+    })
 
-exports.testDirectParamAddress = function(test){
-  eb.direct (direct, function(err, reply) {
-    test.equal (reply.params.payment.address, direct.address)
-    test.done();
-  });
-};
+    it('Param "street_number" should be passed', function(done) {
+      test.equal (reply.params.payment.street_number, direct.street_number)
+      done();  
+    })
 
-exports.testDirectParamDocument = function(test){
-  eb.direct (direct, function(err, reply) {
-    test.equal (reply.params.payment.document, direct.document)
-    test.done();
-  });
-};
+    it('Param "address" should be passed', function(done) {
+      test.equal (reply.params.payment.address, direct.address)
+      done();  
+    })
 
-exports.testDirectParamBirthDate = function(test){
-  eb.direct (direct, function(err, reply) {
-    test.equal (reply.params.payment.birth_date, direct.birth_date)
-    test.done();
-  });
-};
+    it('Param "document" should be passed', function(done) {
+      test.equal (reply.params.payment.document, direct.document)
+      done();  
+    })
 
-exports.testDirectParamEmail = function(test){
-  eb.direct (direct, function(err, reply) {
-    test.equal (reply.params.payment.email, direct.email)
-    test.done();
-  });
-};
+    it('Param "birth_date" should be passed', function(done) {
+      test.equal (reply.params.payment.birth_date, direct.birth_date)
+      done();  
+    })
 
-exports.testDirectParamName = function(test){
-  eb.direct (direct, function(err, reply) {
-    test.equal (reply.params.payment.name, direct.name)
-    test.done();
-  });
-};
+    it('Param "email" should be passed', function(done) {
+      test.equal (reply.params.payment.email, direct.email)
+      done();  
+    })
 
-exports.testDirectParamPaymentTypeCode = function(test){
-  eb.direct (direct, function(err, reply) {
-    test.equal (reply.params.payment.payment_type_code, direct.payment_type_code)
-    test.done();
-  });
-};
+    it('Param "name" should be passed', function(done) {
+      test.equal (reply.params.payment.name, direct.name)
+      done();  
+    })
 
-exports.testDirectParamAmount = function(test){
-  eb.direct (direct, function(err, reply) {
-    test.equal (reply.params.payment.amount_total, direct.amount_total)
-    test.done();
-  });
-};
+    it('Param "payment_type_code" should be passed', function(done) {
+      test.equal (reply.params.payment.payment_type_code, direct.payment_type_code)
+      done();  
+    })
+
+    it('Param "amount_total" should be passed', function(done) {
+      test.equal (reply.params.payment.amount_total, direct.amount_total)
+      done();  
+    })
+  })
+});

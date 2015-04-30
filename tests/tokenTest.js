@@ -30,6 +30,7 @@
 
 var utils = require('../lib/Config');
 var ebanx = require('../lib/ebanx');
+var test = require('assert');
 var eb = ebanx();
 
 eb.configure({
@@ -49,46 +50,46 @@ var creditcard = {
   }
 };
 
-exports.testToken = function(test){
+describe('Token Operation', function() {
   eb.token (creditcard, function(err, reply) {
-    test.equal ("object", typeof(reply));
-    test.equal (reply.method,"POST");
-    test.equal (reply.uri,"ws/token");
-    test.done();
-  });
-};
+    it('Should return object', function(done) {
+      test.equal ("object", typeof(reply));
+      done();   
+    })
+    
+    it('Method should be POST', function(done) {
+      test.equal (reply.method,"POST");
+      done();
+    })
 
-exports.testTokenParamsPaymentTypeCode = function(test){
-  eb.token (creditcard, function(err, reply) {
-    test.equal (reply.params.payment_type_code, creditcard.payment_type_code);
-    test.done();
-  });
-};
+    it('URI should point to ws/token', function(done) {
+      test.equal (reply.uri,"ws/token");
+      done();
+    })
 
-exports.testTokenParamsCreditCardNumber = function(test){
-  eb.token (creditcard, function(err, reply) {
-    test.equal (reply.params.creditcard.card_number, creditcard.creditcard.card_number);
-    test.done();
-  });
-};
+    it('Params should have payment_type_code', function(done) {
+      test.equal (reply.params.payment_type_code, creditcard.payment_type_code);
+      done();  
+    })
 
-exports.testTokenParamsCreditCardName = function(test){
-  eb.token (creditcard, function(err, reply) {
-    test.equal (reply.params.creditcard.card_name, creditcard.creditcard.card_name);
-    test.done();
-  });
-};
+    it('Params should have creditcard.card_number', function(done) {
+      test.equal (reply.params.creditcard.card_number, creditcard.creditcard.card_number);
+      done();  
+    })
 
-exports.testTokenParamsCreditCardDueDate = function(test){
-  eb.token (creditcard, function(err, reply) {
-    test.equal (reply.params.creditcard.card_due_date, creditcard.creditcard.card_due_date);
-    test.done();
-  });
-};
+    it('Params should have creditcard.card_name', function(done) {
+      test.equal (reply.params.creditcard.card_name, creditcard.creditcard.card_name);
+      done();  
+    })
 
-exports.testTokenParamsCreditCardCvv = function(test){
-  eb.token (creditcard, function(err, reply) {
-    test.equal (reply.params.creditcard.card_cvv, creditcard.creditcard.card_cvv);
-    test.done();
-  });
-};
+    it('Params should have creditcard.card_due_date', function(done) {
+      test.equal (reply.params.creditcard.card_due_date, creditcard.creditcard.card_due_date);
+      done();  
+    })
+
+    it('Params should have creditcard.card_cvv', function(done) {
+      test.equal (reply.params.creditcard.card_cvv, creditcard.creditcard.card_cvv);
+      done();  
+    })
+  })
+});

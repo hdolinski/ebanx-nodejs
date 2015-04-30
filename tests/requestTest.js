@@ -30,6 +30,7 @@
 
 var utils = require('../lib/Config');
 var ebanx = require('../lib/ebanx');
+var test = require('assert');
 var eb = ebanx();
 
 eb.configure({
@@ -49,60 +50,56 @@ request = {
 	amount : 423.00
 }
 
-exports.testRequest = function(test){
+describe('Request Operation With Hash', function() {
   eb.request (request, function(err, reply) {
-    test.equal ("object", typeof(reply));
-    test.equal (reply.method,"POST");
-    test.equal (reply.uri,"ws/request");
-    test.done();
-  });
-};
+    it('Should return object', function(done) {
+      test.equal ("object", typeof(reply));
+      done();   
+    })
+    
+    it('Method should be POST', function(done) {
+      test.equal (reply.method,"POST");
+      done();
+    })
 
-exports.testRequestParamName = function(test){
-  eb.request (request, function(err, reply) {
-    test.equal (reply.params.name, request.name);
-    test.done();
-  });
-};
+    it('URI should point to ws/request', function(done) {
+      test.equal (reply.uri,"ws/request");
+      done();
+    })
 
-exports.testRequestParamEmail = function(test){
-  eb.request (request, function(err, reply) {
-    test.equal (reply.params.email, request.email);
-    test.done();
-  });
-};
+    it('Params should have name', function(done) {
+      test.equal (reply.params.name, request.name);
+      done();  
+    })
 
-exports.testRequestParamCountry = function(test){
-  eb.request (request, function(err, reply) {
-    test.equal (reply.params.country, request.country);
-    test.done();
-  });
-};
+    it('Params should have email', function(done) {
+      test.equal (reply.params.email, request.email);
+      done();  
+    })
 
-exports.testRequestParamPaymentTypeCode = function(test){
-  eb.request (request, function(err, reply) {
-    test.equal (reply.params.payment_type_code, request.payment_type_code);
-    test.done();
-  });
-};
+    it('Params should have country', function(done) {
+      test.equal (reply.params.country, request.country);
+      done();  
+    })
 
-exports.testRequestParamMerchantPaymentCode = function(test){
-  eb.request (request, function(err, reply) {
-    test.equal (reply.params.merchant_payment_code, request.merchant_payment_code);
-    test.done();
-  });
-};
+    it('Params should have payment_type_code', function(done) {
+      test.equal (reply.params.payment_type_code, request.payment_type_code);
+      done();  
+    })
 
-exports.testRequestParamCurrencyCode = function(test){
-  eb.request (request, function(err, reply) {
-    test.equal (reply.params.currency_code, request.currency_code);
-    test.done();
-  });
-};
+    it('Params should have merchant_payment_code', function(done) {
+      test.equal (reply.params.merchant_payment_code, request.merchant_payment_code);
+      done();  
+    })
 
-exports.testRequestParamAmount = function(test){
-  eb.request (request, function(err, reply) {
-    test.equal (reply.params.amount, request.amount);
-    test.done();
-  });
-};
+    it('Params should have currency_code', function(done) {
+      test.equal (reply.params.currency_code, request.currency_code);
+      done();  
+    })
+
+    it('Params should have amount', function(done) {
+      test.equal (reply.params.amount, request.amount);
+      done();  
+    })
+  })
+});

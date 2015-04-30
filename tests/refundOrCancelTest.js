@@ -30,6 +30,7 @@
 
 var utils = require('../lib/Config');
 var ebanx = require('../lib/ebanx');
+var test = require('assert');
 var eb = ebanx();
 
 eb.configure({
@@ -44,13 +45,31 @@ var refund = {
     description : "Lorem ipsum dolor sit amet."
 };
 
-exports.testRefundOrCancel = function(test){
+describe('RefundOrCancel Operation', function() {
   eb.refundOrCancel (refund, function(err, reply) {
-    test.equal ("object", typeof(reply));
-    test.equal (reply.method,"POST");
-    test.equal (reply.uri,"ws/refundOrCancel");
-    test.equal (reply.params.hash , refund.hash);
-    test.equal (reply.params.description , refund.description);
-    test.done();
-  });
-};
+    it('Should return object', function(done) {
+      test.equal ("object", typeof(reply));
+      done();   
+    })
+    
+    it('Method should be POST', function(done) {
+      test.equal (reply.method,"POST");
+      done();
+    })
+
+    it('URI should point to ws/refundOrCancel', function(done) {
+      test.equal (reply.uri,"ws/refundOrCancel");
+      done();
+    })
+
+    it('Params should have hash', function(done) {
+      test.equal (reply.params.hash, refund.hash)
+      done();  
+    })
+
+    it('Params should have description', function(done) {
+      test.equal (reply.params.description , refund.description);
+      done();  
+    })
+  })
+});
