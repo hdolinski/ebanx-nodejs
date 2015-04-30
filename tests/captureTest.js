@@ -30,7 +30,6 @@
 
 var utils = require('../lib/Config');
 var ebanx = require('../lib/ebanx');
-var test = require('assert');
 var eb = ebanx();
 
 eb.configure({
@@ -44,25 +43,28 @@ var hash = {hash : "552c21d21c55dd815c92ca69d937603913f1e69153916b0f"};
 
 var merchant_payment_code = {merchant_payment_code : "1428955597"};
 
+var should = require('chai').should();
+var expect = require('chai').expect;
+
 describe('Capture Operation With Hash', function() {
   eb.capture ({hash : hash}, function(err, reply) {
     it('Should return object', function(done) {
-      test.equal ("object", typeof(reply));
+      reply.should.be.an('object');
       done();   
     })
     
     it('Method should be GET', function(done) {
-      test.equal (reply.method,"GET");
+      expect(reply.method).to.be.equal("GET");
       done();
     })
 
     it('URI should point to ws/capture', function(done) {
-      test.equal (reply.uri,"ws/capture");
+      expect(reply.uri).to.be.equal("ws/capture");
       done();
     })
 
     it('Params must be hash', function(done) {
-      test.equal (reply.params.hash, hash)
+      expect(reply.params).to.have.property("hash");
       done();  
     })
   })
@@ -71,22 +73,22 @@ describe('Capture Operation With Hash', function() {
 describe('Capture Operation With Merchant Payment Code', function() {
   eb.capture ({merchant_payment_code : merchant_payment_code}, function(err, reply) {
     it('Should return object', function(done) {
-      test.equal ("object", typeof(reply));
+      reply.should.be.an('object');
       done();   
     })
     
     it('Method should be GET', function(done) {
-      test.equal (reply.method,"GET");
+      expect(reply.method).to.be.equal("GET");
       done();
     })
 
     it('URI should point to ws/capture', function(done) {
-      test.equal (reply.uri,"ws/capture");
+      expect(reply.uri).to.be.equal("ws/capture");
       done();
     })
 
     it('Params must be merchant_payment_code', function(done) {
-      test.equal (reply.params.merchant_payment_code, merchant_payment_code)
+      expect(reply.params).to.have.property("merchant_payment_code");
       done();  
     })
   })

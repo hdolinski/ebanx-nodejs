@@ -28,40 +28,33 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-var validator = require('../lib/resources/Validator');
+var utils = require('../lib/Config');
+var ebanx = require('../lib/ebanx');
+var eb = ebanx();
+
+eb.configure({
+  integrationKey : "integration_key",
+  testMode : true
+});
+
+var hash = {hash : "552c21d21c55dd815c92ca69d937603913f1e69153916b0f"};
 
 var should = require('chai').should();
 var expect = require('chai').expect;
 
-describe('Validator module', function() {
-  var token = {
-    payment_type_code : "visa",
-    creditcard : {
-      card_number : "4111111111111111",
-      card_name : "eita teste",
-      card_due_date : "10/2020",
-      card_cvv : "123",
-      levelThree : {
-        thisIsLevelThree : "Test"
-      }
-    }
-  }
-  
-  it('Should have hash', function(done) {
-    validator.params = {hash : "LoremIpsum"};
-    expect(validator.validatePresence("hash")).to.be.ok;
-    done();  
-  })
-  
-  it('Should have creditcard.card_number', function(done) {
-    validator.params = token;
-    expect(validator.validatePresence("creditcard.card_number")).to.be.ok;
+describe('HTTP Client test', function() {
+  it('Should return error', function(done) {
+    eb.query (hash, function(err, reply) {
+      should.exist(err);
+      should.not.exist(reply); 
+    })
     done();
   })
-  
-  it('Should have creditcard.levelThree.thisIsLevelThree', function(done) {
-    validator.params = token;
-    expect(validator.validatePresence("creditcard.levelThree.thisIsLevelThree")).to.be.ok;
+
+    it('Should return another error', function(done) {
+    eb.query (hash, function(err, reply) {
+      should.not.exist(reply); 
+    })
     done();
   })
 });

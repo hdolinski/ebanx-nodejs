@@ -28,40 +28,35 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-var validator = require('../lib/resources/Validator');
+var ebanx = require('../lib/ebanx');
+var utils = require('../lib/Config');
+var eb = ebanx();
+
+eb.configure({
+	integrationKey : "integration_key",
+	testMode : true
+});
 
 var should = require('chai').should();
 var expect = require('chai').expect;
 
-describe('Validator module', function() {
-  var token = {
-    payment_type_code : "visa",
-    creditcard : {
-      card_number : "4111111111111111",
-      card_name : "eita teste",
-      card_due_date : "10/2020",
-      card_cvv : "123",
-      levelThree : {
-        thisIsLevelThree : "Test"
-      }
-    }
-  }
-  
-  it('Should have hash', function(done) {
-    validator.params = {hash : "LoremIpsum"};
-    expect(validator.validatePresence("hash")).to.be.ok;
-    done();  
+describe('Configuration', function() {
+  it('Integration Key should be setted', function(done) {
+    expect(eb.settings.integrationKey).to.be.equal(utils.getIntegrationKey());
+    done();  	
   })
-  
-  it('Should have creditcard.card_number', function(done) {
-    validator.params = token;
-    expect(validator.validatePresence("creditcard.card_number")).to.be.ok;
-    done();
+
+  it('Test Mode Should be Setted', function(done) {
+    expect(eb.settings.testMode).to.be.equal(utils.getTestMode());
+    done();   
   })
-  
-  it('Should have creditcard.levelThree.thisIsLevelThree', function(done) {
-    validator.params = token;
-    expect(validator.validatePresence("creditcard.levelThree.thisIsLevelThree")).to.be.ok;
-    done();
+
+  it('EndPoint return for testMode false and true', function(done) {
+    expect(utils.getEndPoint()).to.be.equal("https://sandbox.ebanx.com/");
+    eb.configure({
+      testMode : false
+    })
+    expect(utils.getEndPoint()).to.be.equal("https://api.ebanx.com/");
+    done();   
   })
 });

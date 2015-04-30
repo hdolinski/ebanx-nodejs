@@ -44,49 +44,52 @@ var hash = {hash : "552c21d21c55dd815c92ca69d937603913f1e69153916b0f"};
 
 var merchant_payment_code = {merchant_payment_code : "1428955597"};
 
+var should = require('chai').should();
+var expect = require('chai').expect;
+
 describe('Query Operation With Hash', function() {
   eb.query ({hash : hash}, function(err, reply) {
     it('Should return object', function(done) {
-      test.equal ("object", typeof(reply));
+      reply.should.be.an('object');
       done();   
     })
     
     it('Method should be GET', function(done) {
-      test.equal (reply.method,"GET");
+      expect(reply.method).to.be.equal("GET");
       done();
     })
 
     it('URI should point to ws/query', function(done) {
-      test.equal (reply.uri,"ws/query");
+      expect(reply.uri).to.be.equal("ws/query");
       done();
     })
 
     it('Params must be hash', function(done) {
-      test.equal (reply.params.hash, hash)
+      expect(reply.params).to.have.property("hash");
       done();  
     })
   })
 });
 
-describe('Query Operation With Merchant Payment Code', function() {
+describe('Query Operation With Hash', function() {
   eb.query ({merchant_payment_code : merchant_payment_code}, function(err, reply) {
     it('Should return object', function(done) {
-      test.equal ("object", typeof(reply));
+      reply.should.be.an('object');
       done();   
     })
     
     it('Method should be GET', function(done) {
-      test.equal (reply.method,"GET");
+      expect(reply.method).to.be.equal("GET");
       done();
     })
 
     it('URI should point to ws/query', function(done) {
-      test.equal (reply.uri,"ws/query");
+      expect(reply.uri).to.be.equal("ws/query");
       done();
     })
 
     it('Params must be merchant_payment_code', function(done) {
-      test.equal (reply.params.merchant_payment_code, merchant_payment_code)
+      expect(reply.params).to.have.property("merchant_payment_code");
       done();  
     })
   })

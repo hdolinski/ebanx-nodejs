@@ -42,30 +42,33 @@ utils.httpClient = "Mock";
 
 var currency = {currency_code : "USD", currency_base : "BRL"};
 
+var should = require('chai').should();
+var expect = require('chai').expect;
+
 describe('Exchange Operation', function() {
   eb.exchange (currency, function(err, reply) {
     it('Should return object', function(done) {
-      test.equal ("object", typeof(reply));
+      reply.should.be.an('object');
       done();   
     })
     
     it('Method should be GET', function(done) {
-      test.equal (reply.method,"GET");
+      expect(reply.method).to.be.equal("GET");
       done();
     })
 
     it('URI should point to ws/exchange', function(done) {
-      test.equal (reply.uri,"ws/exchange");
+      expect(reply.uri).to.be.equal("ws/exchange");
       done();
     })
 
     it('Param must have currency_code', function(done) {
-      test.equal (reply.params.currency_code, currency.currency_code)
+      expect(reply.params).to.have.property("currency_code");
       done();  
     })
 
     it('Param must have currency_base', function(done) {
-      test.equal (reply.params.currency_base, currency.currency_base)
+      expect(reply.params).to.have.property("currency_base");
       done();  
     })
   })

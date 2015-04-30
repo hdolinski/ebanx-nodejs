@@ -30,7 +30,6 @@
 
 var utils = require('../lib/Config');
 var ebanx = require('../lib/ebanx');
-var test = require('assert');
 var eb = ebanx();
 
 eb.configure({
@@ -50,55 +49,58 @@ request = {
 	amount : 423.00
 }
 
+var should = require('chai').should();
+var expect = require('chai').expect;
+
 describe('Request Operation With Hash', function() {
   eb.request (request, function(err, reply) {
     it('Should return object', function(done) {
-      test.equal ("object", typeof(reply));
+      reply.should.be.an('object');
       done();   
     })
     
     it('Method should be POST', function(done) {
-      test.equal (reply.method,"POST");
+      expect(reply.method).to.be.equal("POST");
       done();
     })
 
     it('URI should point to ws/request', function(done) {
-      test.equal (reply.uri,"ws/request");
+      expect(reply.uri).to.be.equal("ws/request");
       done();
     })
 
     it('Params should have name', function(done) {
-      test.equal (reply.params.name, request.name);
+      expect(reply.params).to.have.property("name");
       done();  
     })
 
     it('Params should have email', function(done) {
-      test.equal (reply.params.email, request.email);
+      expect(reply.params).to.have.property("email");
       done();  
     })
 
     it('Params should have country', function(done) {
-      test.equal (reply.params.country, request.country);
+      expect(reply.params).to.have.property("country");
       done();  
     })
 
     it('Params should have payment_type_code', function(done) {
-      test.equal (reply.params.payment_type_code, request.payment_type_code);
+      expect(reply.params).to.have.property("payment_type_code");
       done();  
     })
 
     it('Params should have merchant_payment_code', function(done) {
-      test.equal (reply.params.merchant_payment_code, request.merchant_payment_code);
+      expect(reply.params).to.have.property("merchant_payment_code");
       done();  
     })
 
     it('Params should have currency_code', function(done) {
-      test.equal (reply.params.currency_code, request.currency_code);
+      expect(reply.params).to.have.property("currency_code");
       done();  
     })
 
     it('Params should have amount', function(done) {
-      test.equal (reply.params.amount, request.amount);
+      expect(reply.params).to.have.property("amount");
       done();  
     })
   })

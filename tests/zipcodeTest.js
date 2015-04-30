@@ -28,33 +28,42 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-var ebanx = require('../lib/ebanx');
 var utils = require('../lib/Config');
-var test = require('assert');
+var ebanx = require('../lib/ebanx');
 var eb = ebanx();
 
 eb.configure({
-	integrationKey : "integration_key",
-	testMode : true
+  integrationKey : "integration_key",
+  testMode : true
 });
 
-describe('Configuration', function() {
-  it('Integration Key should be setted', function(done) {
-  	test.equal( eb.settings.integrationKey, utils.getIntegrationKey());
-    done();  	
-  })
+utils.httpClient = "Mock";
 
-  it('Test Mode Should be Setted', function(done) {
-    test.equal( eb.settings.testMode, utils.getTestMode());
-    done();   
-  })
+var zipcode = {zipcode : "82530000"};
 
-  it('EndPoint return for testMode false and true', function(done) {
-    test.equal( utils.getEndPoint(), "https://sandbox.ebanx.com/");
-    eb.configure({
-      testMode : false
+var should = require('chai').should();
+var expect = require('chai').expect;
+
+describe('Zipcode Operation', function() {
+  eb.zipcode (zipcode, function(err, reply) {
+    it('Should return object', function(done) {
+      reply.should.be.an('object');
+      done();   
     })
-    test.equal( utils.getEndPoint(), "https://api.ebanx.com/");
-    done();   
+    
+    it('Method should be GET', function(done) {
+      expect(reply.method).to.be.equal("GET");
+      done();
+    })
+
+    it('URI should point to ws/zipcode', function(done) {
+      expect(reply.uri).to.be.equal("ws/zipcode");
+      done();
+    })
+
+    it('Params must be zipcode', function(done) {
+      expect(reply.params).to.have.property("zipcode");
+      done();  
+    })
   })
 });

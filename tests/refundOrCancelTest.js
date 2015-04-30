@@ -30,7 +30,6 @@
 
 var utils = require('../lib/Config');
 var ebanx = require('../lib/ebanx');
-var test = require('assert');
 var eb = ebanx();
 
 eb.configure({
@@ -40,6 +39,9 @@ eb.configure({
 
 utils.httpClient = "Mock";
 
+var should = require('chai').should();
+var expect = require('chai').expect;
+
 var refund = {
 	hash : "552c21d21c55dd815c92ca69d937603913f1e69153916b0f",
     description : "Lorem ipsum dolor sit amet."
@@ -48,27 +50,27 @@ var refund = {
 describe('RefundOrCancel Operation', function() {
   eb.refundOrCancel (refund, function(err, reply) {
     it('Should return object', function(done) {
-      test.equal ("object", typeof(reply));
+      reply.should.be.an('object');
       done();   
     })
     
     it('Method should be POST', function(done) {
-      test.equal (reply.method,"POST");
+      expect(reply.method).to.be.equal("POST");
       done();
     })
 
     it('URI should point to ws/refundOrCancel', function(done) {
-      test.equal (reply.uri,"ws/refundOrCancel");
+      expect(reply.uri).to.be.equal("ws/refundOrCancel");
       done();
     })
 
     it('Params should have hash', function(done) {
-      test.equal (reply.params.hash, refund.hash)
+      expect(reply.params).to.have.property("hash");
       done();  
     })
 
     it('Params should have description', function(done) {
-      test.equal (reply.params.description , refund.description);
+      expect(reply.params.description).to.be.equal(refund.description);
       done();  
     })
   })

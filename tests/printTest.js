@@ -30,7 +30,6 @@
 
 var utils = require('../lib/Config');
 var ebanx = require('../lib/ebanx');
-var test = require('assert');
 var eb = ebanx();
 
 eb.configure({
@@ -42,25 +41,28 @@ utils.httpClient = "Mock";
 
 var hash = {hash : "552c21d21c55dd815c92ca69d937603913f1e69153916b0f"};
 
+var should = require('chai').should();
+var expect = require('chai').expect;
+
 describe('Print Operation', function() {
   eb.print (hash, function(err, reply) {
     it('Should return object', function(done) {
-      test.equal ("object", typeof(reply));
+      reply.should.be.an('object');
       done();   
     })
     
     it('Method should be GET', function(done) {
-      test.equal (reply.method,"GET");
+      expect(reply.method).to.be.equal("GET");
       done();
     })
 
     it('URI should point to print', function(done) {
-      test.equal (reply.uri,"print");
+      expect(reply.uri).to.be.equal("print");
       done();
     })
 
     it('Param must have hash', function(done) {
-      test.equal (reply.params.hash, hash.hash)
+      expect(reply.params).to.have.property("hash");
       done();  
     })
   })

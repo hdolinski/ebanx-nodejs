@@ -50,45 +50,48 @@ var creditcard = {
   }
 };
 
+var should = require('chai').should();
+var expect = require('chai').expect;
+
 describe('Token Operation', function() {
   eb.token (creditcard, function(err, reply) {
     it('Should return object', function(done) {
-      test.equal ("object", typeof(reply));
+      reply.should.be.an('object');
       done();   
     })
     
     it('Method should be POST', function(done) {
-      test.equal (reply.method,"POST");
+      expect(reply.method).to.be.equal("POST");
       done();
     })
 
     it('URI should point to ws/token', function(done) {
-      test.equal (reply.uri,"ws/token");
+      expect(reply.uri).to.be.equal("ws/token");
       done();
     })
 
     it('Params should have payment_type_code', function(done) {
-      test.equal (reply.params.payment_type_code, creditcard.payment_type_code);
+      expect(reply.params).to.have.property("payment_type_code");
       done();  
     })
 
     it('Params should have creditcard.card_number', function(done) {
-      test.equal (reply.params.creditcard.card_number, creditcard.creditcard.card_number);
+      expect(reply.params.creditcard).to.have.property("card_number");
       done();  
     })
 
     it('Params should have creditcard.card_name', function(done) {
-      test.equal (reply.params.creditcard.card_name, creditcard.creditcard.card_name);
+      expect(reply.params.creditcard).to.have.property("card_name");
       done();  
     })
 
     it('Params should have creditcard.card_due_date', function(done) {
-      test.equal (reply.params.creditcard.card_due_date, creditcard.creditcard.card_due_date);
+      expect(reply.params.creditcard).to.have.property("card_due_date");
       done();  
     })
 
     it('Params should have creditcard.card_cvv', function(done) {
-      test.equal (reply.params.creditcard.card_cvv, creditcard.creditcard.card_cvv);
+      expect(reply.params.creditcard).to.have.property("card_cvv");
       done();  
     })
   })
