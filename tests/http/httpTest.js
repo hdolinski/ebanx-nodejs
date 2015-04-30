@@ -28,16 +28,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-var utils = require('../lib/Config');
-var ebanx = require('../lib/ebanx');
-var eb = ebanx();
-
-eb.configure({
-  integrationKey : "integration_key",
-  testMode : true
-});
-
-utils.httpClient = "HTTP";
+var config = require('../../lib/Config');
 
 var hash = {hash : "552c21d21c55dd815c92ca69d937603913f1e69153916b0f"};
 
@@ -45,12 +36,17 @@ var should = require('chai').should();
 var expect = require('chai').expect;
 
 describe('HTTP Client test', function() {
-  eb.configure({
-  integrationKey : "integration_key",
-  testMode : true
-});
-  utils.httpClient = "HTTP";
+  var ebanx = require('../../lib/ebanx');
+  var eb = ebanx();
+  
   it('Should return error', function(done) {
+    
+    eb.configure({
+      integrationKey : "integration_key",
+      testMode : true
+    });
+
+    eb.settings.usingHttp = true;
     eb.query (hash, function(err, reply) {
       should.exist(err);
       should.not.exist(reply); 
@@ -58,7 +54,7 @@ describe('HTTP Client test', function() {
     done();
   })
 
-    it('Should return another error', function(done) {
+  it('Should return another error', function(done) {
     eb.query (hash, function(err, reply) {
       should.not.exist(reply); 
     })

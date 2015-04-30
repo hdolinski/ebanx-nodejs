@@ -37,7 +37,7 @@ eb.configure({
   testMode : true
 });
 
-utils.httpClient = "Mock";
+eb.settings.usingHttp = false;
 
 var refund = {
 	hash : "552c21d21c55dd815c92ca69d937603913f1e69153916b0f",

@@ -38,7 +38,7 @@ eb.configure({
   testMode : true
 });
 
-utils.httpClient = "Mock";
+eb.settings.usingHttp = false;
 
 var currency = {currency_code : "USD", currency_base : "BRL"};
 

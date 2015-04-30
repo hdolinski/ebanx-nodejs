@@ -37,7 +37,7 @@ eb.configure({
   testMode : true
 });
 
-utils.httpClient = "Mock";
+eb.settings.usingHttp = false;
 
 var should = require('chai').should();
 var expect = require('chai').expect;

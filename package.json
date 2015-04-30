@@ -20,7 +20,7 @@
     "istanbul": "0.3.5"
   },
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha ./tests",
+    "test": "./node_modules/mocha/bin/mocha --recursive ./tests",
     "test-travis": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./tests"
  },
   "keywords": [

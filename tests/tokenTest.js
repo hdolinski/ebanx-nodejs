@@ -38,7 +38,7 @@ eb.configure({
   testMode : true
 });
 
-utils.httpClient = "Mock";
+eb.settings.usingHttp = false;
 
 var creditcard = {
   payment_type_code : "visa",
