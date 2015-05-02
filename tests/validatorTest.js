@@ -42,7 +42,9 @@ describe('Validator module', function() {
       card_due_date : "10/2020",
       card_cvv : "123",
       levelThree : {
-        thisIsLevelThree : "Test"
+        thisIsLevelThree : {
+          yetAnotherLevel : "test"
+        }
       }
     }
   }
@@ -62,6 +64,27 @@ describe('Validator module', function() {
   it('Should have creditcard.levelThree.thisIsLevelThree', function(done) {
     validator.params = token;
     expect(validator.validatePresence("creditcard.levelThree.thisIsLevelThree")).to.be.ok;
+    done();
+  })
+
+  it('Should have creditcard.levelThree.thisIsLevelThree.yetAnotherLevel', function(done) {
+    validator.params = token;
+    expect(validator.validatePresence("creditcard.levelThree.thisIsLevelThree.yetAnotherLevel")).to.be.ok;
+    done();
+  })
+
+  it('Should return config error', function(done) {
+    var err = new Error('Config value integrationKey not informed');
+    config = {
+      integrationKey : "",
+      testMode : true
+    }
+
+    //expect(validator.validateConfig(config)).to.throw(Error);
+    expect(function() {
+      validator.validateConfig(config);
+    }).to.throw('Config value integrationKey not informed');
+
     done();
   })
 });

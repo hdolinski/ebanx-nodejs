@@ -28,7 +28,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-var config = require('../../lib/Config');
+var config = require('../lib/Config');
 
 var hash = {hash : "552c21d21c55dd815c92ca69d937603913f1e69153916b0f"};
 
@@ -36,7 +36,7 @@ var should = require('chai').should();
 var expect = require('chai').expect;
 
 describe('HTTP Client test', function() {
-  var ebanx = require('../../lib/ebanx');
+  var ebanx = require('../lib/ebanx');
   var eb = ebanx();
   
   it('Should return error', function(done) {
