@@ -63,10 +63,10 @@ var direct = {
 var should = require('chai').should();
 var expect = require('chai').expect;
 
-describe('Direct Operation Credit Card', function() {
+describe('Direct Operation Credit Card Tolkien'function() {
   eb.direct (direct, function(err, reply) {
     it('Should test creditcard.token object', function(done) {
-      expect(reply.params.creditcard).to.have.property("token");
+      expect(reply.params.payment.creditcard).to.have.property("token");
       done();   
     })
   })

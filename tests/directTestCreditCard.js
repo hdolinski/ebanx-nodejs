@@ -69,7 +69,7 @@ var expect = require('chai').expect;
 describe('Direct Operation Credit Card', function() {
   eb.direct (direct, function(err, reply) {
     it('Should test creditcard object', function(done) {
-      expect(reply.params).to.have.property("creditcard");
+      expect(reply.params.payment).to.have.property("creditcard");
       done();   
     })
   })
