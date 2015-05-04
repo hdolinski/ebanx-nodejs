@@ -80,7 +80,6 @@ describe('HTTP Client test', function() {
       amount_total : 423.00
     }
     eb.direct (direct, function(err, reply) {
-      console.log(err);
       should.not.exist(reply); 
     })
     done();
