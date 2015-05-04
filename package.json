@@ -2,9 +2,9 @@
   "author": "Heitor Dolinski <heitor@ebanx.com> (http://www.ebanx.com/)",
   "license": "ISC",
   "name": "ebanx",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "homepage": "https://github.com/ebanx/ebanx-nodejs",
-  "description": "Provides access to EBANX API through HTTP requests",
+  "description": "Provides access to EBANX API",
   "main": "index.js",
   "repository": {
     "type": "git",
