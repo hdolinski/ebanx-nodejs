@@ -104,7 +104,7 @@ describe('Validator module', function() {
     validator.params = params;
     expect(function() {
       validator.validatePresence("hash");
-    }).to.throw('The paramenter hash was not supplied.');
+    }).to.throw('The parameter hash was not supplied.');
 
     done();
   })
@@ -126,7 +126,7 @@ describe('Validator module', function() {
     validator.params = params;
     expect(function() {
       validator.validatePresenceOr("hash", "merchant_payment_code");
-    }).to.throw('Either parameter hash or merchant_payment_code must be supplied, but bot both.');
+    }).to.throw('Either parameter hash or merchant_payment_code must be supplied, but not both.');
 
     done();
   })
