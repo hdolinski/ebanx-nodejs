@@ -73,17 +73,60 @@ describe('Validator module', function() {
     done();
   })
 
-  it('Should return config error', function(done) {
+  it('Should test integrationKey config error', function(done) {
     var err = new Error('Config value integrationKey not informed');
     config = {
       integrationKey : "",
       testMode : true
-    }
-
-    //expect(validator.validateConfig(config)).to.throw(Error);
+    }    
     expect(function() {
       validator.validateConfig(config);
     }).to.throw('Config value integrationKey not informed');
+
+    done();
+  })
+
+  it('Should test testMode config error', function(done) {
+    config = {
+      integrationKey : "integration_key",
+      testMode : "true"
+    }    
+    expect(function() {
+      validator.validateConfig(config);
+    }).to.throw('Config key testMode not boolean value');
+
+    done();
+  })
+
+  it('Should test presence error', function(done) {
+    var params = {};
+    
+    validator.params = params;
+    expect(function() {
+      validator.validatePresence("hash");
+    }).to.throw('The paramenter hash was not supplied.');
+
+    done();
+  })
+
+  it('Should test presenceOr error: absence', function(done) {
+    var params = {};
+    
+    validator.params = params;
+    expect(function() {
+      validator.validatePresenceOr("hash", "merchant_payment_code");
+    }).to.throw('Either the parameter hash or merchant_payment_code must be supplied.');
+
+    done();
+  })
+
+  it('Should test presenceOr error: double presence', function(done) {
+    var params = {hash : "foo", merchant_payment_code : "bar"};
+    
+    validator.params = params;
+    expect(function() {
+      validator.validatePresenceOr("hash", "merchant_payment_code");
+    }).to.throw('Either parameter hash or merchant_payment_code must be supplied, but bot both.');
 
     done();
   })
