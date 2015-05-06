@@ -66,7 +66,7 @@ var direct = {
 var should = require('chai').should();
 var expect = require('chai').expect;
 
-describe('Direct Operation Debit', function() {
+describe('Direct Operation Person Type', function() {
   eb.direct (direct, function(err, reply) {
     it('Should test person_type="business"', function(done) {
       console.log(reply);
