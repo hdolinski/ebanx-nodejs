@@ -69,13 +69,11 @@ var expect = require('chai').expect;
 describe('Direct Operation Person Type', function() {
   eb.direct (direct, function(err, reply) {
     it('Should test person_type="business"', function(done) {
-      console.log(reply);
       expect(reply.params.payment.person_type).to.be.equal("business");
       done();   
     })
 
     it('Should test responsible object for person_type="business"', function(done) {
-      console.log(reply);
       expect(reply.params.payment).to.have.property("responsible");
       done();   
     })
